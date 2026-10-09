@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>VoiceBill Tamil - AI POS System</title>
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .landing-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            height: 100vh;
+            text-align: center;
+        }
+        .landing-content {
+            background: var(--surface);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 90%;
+        }
+        .landing-content h1 {
+            color: var(--primary);
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .landing-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .feature-list {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .feature span {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="landing-body">
+    <div class="landing-content">
+        <h1>🎤 VoiceBill Tamil</h1>
+        <p>The smartest AI-powered POS Billing System for Departmental Stores, Fruits & Vegetable shops.</p>
+        
+        <div class="feature-list">
+            <div class="feature">
+                <span>🗣️</span>
+                <strong>Tamil & English Voice</strong>
+            </div>
+            <div class="feature">
+                <span>⚡</span>
+                <strong>Fast Billing</strong>
+            </div>
+            <div class="feature">
+                <span>🖨️</span>
+                <strong>Thermal Print Ready</strong>
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-large" style="padding: 16px 40px; font-size: 18px;" onclick="window.location.href='/dashboard'">Enter POS System →</button>
+    </div>
+
+    <script>
+        // No authentication check needed
+    </script>
+</body>
+</html>

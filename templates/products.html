@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Products Management{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <button class="btn btn-primary" onclick="openAddProductModal()">+ Add Product</button>
+    <input type="text" id="search-products" placeholder="Search..." onkeyup="filterProductsTable()">
+</div>
+
+<div class="table-container glass-panel">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Unit</th>
+                <th>Aliases</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="products-table-body">
+            <!-- Populated by JS -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <h3 id="modal-title">Add Product</h3>
+        <form id="product-form">
+            <input type="hidden" id="prod-id">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="prod-name" required>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="prod-category">
+                    <option>Departmental Store</option>
+                    <option>Fruits & Vegetables</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" id="prod-price" required>
+                </div>
+                <div class="form-group">
+                    <label>Unit</label>
+                    <input type="text" id="prod-unit" placeholder="kg, packet..." required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>GST %</label>
+                    <input type="number" id="prod-gst" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Initial Stock</label>
+                    <input type="number" id="prod-stock" value="0">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/products.js?v=42"></script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Voice Billing / POS{% endblock %}
+
+{% block content %}
+<div class="billing-container">
+    
+    <!-- Left Panel: Voice Control & Cart -->
+    <div class="billing-left">
+        
+        <div class="voice-controls glass-panel">
+            <div class="language-selector">
+                <label><input type="radio" name="lang" value="ta-IN" checked> தமிழ்</label>
+                <label><input type="radio" name="lang" value="ta-IN"> Tanglish</label>
+                <label><input type="radio" name="lang" value="en-IN"> English</label>
+            </div>
+            
+            <button id="mic-btn" class="mic-button">
+                🎤 START VOICE BILLING
+            </button>
+            <p class="subtitle">Speak in Tamil, Tanglish or English</p>
+            
+            <div id="status-text" class="status-text">Ready</div>
+            <div id="recognized-text" class="recognized-text"></div>
+        </div>
+        
+        <div class="cart-panel glass-panel">
+            <h3>Cart</h3>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>🗑️</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <!-- Cart items here -->
+                </tbody>
+            </table>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₹0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>GST:</span>
+                    <span id="gst-total">₹0.00</span>
+                </div>
+                <div class="summary-row grand-total">
+                    <span>Grand Total:</span>
+                    <span id="grand-total">₹0.00</span>
+                </div>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
+                <button class="btn btn-primary" onclick="confirmBill()">Checkout / Print</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Panel: Product Catalog -->
+    <div class="billing-right glass-panel">
+        <div class="search-bar">
+            <input type="text" id="product-search" placeholder="Search products...">
+        </div>
+        <div id="products-grid" class="products-grid">
+            <!-- Product cards here -->
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirm-modal" class="modal">
+    <div class="modal-content">
+        <h3 id="confirm-title">Confirm Final Bill?</h3>
+        <p id="confirm-msg"></p>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeModal()">Edit Bill</button>
+            <button class="btn btn-primary" onclick="generateAndPrintBill()">PRINT BILL</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Audio element (hidden) -->
+<audio id="success-sound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA" preload="auto"></audio>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/voice.js?v=42"></script>
+<script src="/static/js/billing.js?v=42"></script>
+{% endblock %}

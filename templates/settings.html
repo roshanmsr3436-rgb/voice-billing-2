@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div class="settings-container glass-panel">
+    <form id="settings-form">
+        <div class="form-group">
+            <label>Shop Name</label>
+            <input type="text" id="shop_name" required>
+        </div>
+        <div class="form-group">
+            <label>Shop Address</label>
+            <textarea id="shop_address" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="phone_number">
+        </div>
+        <div class="form-group">
+            <label>GST Number</label>
+            <input type="text" id="gst_number">
+        </div>
+        <div class="form-group">
+            <label>UPI ID</label>
+            <input type="text" id="upi_id">
+        </div>
+        <div class="form-group">
+            <label>Default Language</label>
+            <select id="default_language">
+                <option value="ta-IN">Tamil (ta-IN)</option>
+                <option value="en-IN">English (en-IN)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Printer Name</label>
+            <input type="text" id="printer_name" placeholder="EPSON_TM">
+        </div>
+        <button type="submit" class="btn btn-primary btn-large">Save Settings</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        for (const [key, value] of Object.entries(data)) {
+            const el = document.getElementById(key);
+            if(el) el.value = value;
+        }
+    });
+
+    document.getElementById('settings-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+            shop_name: document.getElementById('shop_name').value,
+            shop_address: document.getElementById('shop_address').value,
+            phone_number: document.getElementById('phone_number').value,
+            gst_number: document.getElementById('gst_number').value,
+            upi_id: document.getElementById('upi_id').value,
+            default_language: document.getElementById('default_language').value,
+            printer_name: document.getElementById('printer_name').value
+        };
+
+        const res = await fetch('/api/settings', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+
+        if(res.ok) {
+            showToast('Settings saved successfully!');
+            document.getElementById('shop-name-header').innerText = payload.shop_name;
+        }
+    });
+</script>
+{% endblock %}

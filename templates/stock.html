@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Stock Management{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <input type="text" id="search-stock" placeholder="Search by name..." onkeyup="filterStockTable()">
+</div>
+
+<div class="table-container glass-panel">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Current Stock</th>
+                <th>Min Stock</th>
+                <th>Status</th>
+                <th>Update Stock</th>
+            </tr>
+        </thead>
+        <tbody id="stock-table-body">
+            <!-- Populated by JS -->
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/stock.js?v=42"></script>
+{% endblock %}

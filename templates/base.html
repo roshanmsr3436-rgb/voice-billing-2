@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>VoiceBill Tamil</title>
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=3">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🎤 VoiceBill</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard" id="nav-dashboard">Dashboard</a>
+                <a href="/billing" id="nav-billing">Voice Billing</a>
+                <a href="/products" id="nav-products">Products</a>
+                <a href="/stock" id="nav-stock">Stock</a>
+                <a href="/bills" id="nav-bills">Bills History</a>
+                <a href="/settings" id="nav-settings">Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">{% block title %}Dashboard{% endblock %}</h1>
+                <div class="header-right">
+                    <span id="shop-name-header">VoiceBill Tamil</span>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/js/app.js?v=42"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

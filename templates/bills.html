@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Bill History{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <input type="text" id="search-bills" placeholder="Search bill number..." onkeyup="filterBillsTable()">
+</div>
+
+<div class="table-container glass-panel">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Bill No</th>
+                <th>Date</th>
+                <th>Items (Count)</th>
+                <th>Total (₹)</th>
+                <th>Payment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="bills-table-body">
+            <!-- Populated by JS -->
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/bills.js?v=42"></script>
+{% endblock %}

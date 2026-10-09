@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Bill - {{ bill.bill_number }}</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            background: #fff;
+            color: #000;
+        }
+        .receipt {
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 15px;
+        }
+        @media print {
+            body {
+                padding: 0;
+            }
+            .receipt {
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .shop-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .divider {
+            border-top: 1px dashed #000;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 4px 0;
+        }
+        th {
+            border-bottom: 1px dashed #000;
+        }
+        .totals-table {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .totals-table td {
+            padding: 2px 0;
+        }
+        .grand-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
+            padding: 5px 0 !important;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .print-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt">
+    <button class="print-btn no-print" onclick="window.print()">Print Receipt</button>
+    
+    <div class="text-center">
+        <div class="shop-name">{{ settings.get('shop_name', 'VOICEBILL TAMIL') }}</div>
+        <div>Receipt</div>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div>
+        <strong>Bill No:</strong> {{ bill.bill_number }}<br>
+        <strong>Date:</strong> {{ bill.created_at }}
+    </div>
+    
+    <div class="divider"></div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="text-left">Item</th>
+                <th class="text-center">Qty</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td class="text-left">{{ item.name }}</td>
+                <td class="text-center">{{ item.quantity }}{{ item.unit }}</td>
+                <td class="text-right">{{ item.price }}</td>
+                <td class="text-right">{{ item.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="divider"></div>
+    
+    <table class="totals-table">
+        <tr>
+            <td class="text-left">Subtotal:</td>
+            <td class="text-right">₹{{ bill.subtotal }}</td>
+        </tr>
+        <tr>
+            <td class="text-left">GST:</td>
+            <td class="text-right">₹{{ bill.gst }}</td>
+        </tr>
+        <tr>
+            <td class="text-left">Discount:</td>
+            <td class="text-right">₹{{ bill.discount }}</td>
+        </tr>
+        <tr>
+            <td class="text-left grand-total">Grand Total:</td>
+            <td class="text-right grand-total">₹{{ bill.grand_total }}</td>
+        </tr>
+        <tr>
+            <td class="text-left">Payment:</td>
+            <td class="text-right">{{ bill.payment_method }}</td>
+        </tr>
+    </table>
+    
+    <div class="divider"></div>
+    
+    <div class="footer">
+        Thank you!<br>
+        Visit Again
+    </div>
+</div>
+
+<script>
+    // Automatically trigger print dialog when page loads
+    window.onload = function() {
+        window.print();
+    };
+</script>
+
+</body>
+</html>

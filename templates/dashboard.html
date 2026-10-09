@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="top-header" style="margin-bottom: 24px;">
+    <h2>Welcome to VoiceBill</h2>
+    <p class="text-muted">Manage your store effortlessly.</p>
+</div>
+
+<div style="display: flex; gap: 20px; margin-bottom: 30px;">
+    <button class="btn btn-primary" onclick="window.location.href='/billing'" style="font-size: 18px; padding: 15px 30px;">
+        🎤 Start Voice Billing
+    </button>
+</div>
+
+<div class="dashboard-grid">
+    <div class="stat-card" style="cursor: pointer; background: white;" onclick="window.location.href='/bills'">
+        <h3 style="color: #666; font-size: 16px;">Today's Sales</h3>
+        <p id="dash-sales" style="font-size: 24px; font-weight: bold; margin-top: 10px;">₹0</p>
+    </div>
+    <div class="stat-card" style="cursor: pointer; background: white;" onclick="window.location.href='/bills'">
+        <h3 style="color: #666; font-size: 16px;">Today's Bills</h3>
+        <p id="dash-bills" style="font-size: 24px; font-weight: bold; margin-top: 10px;">0</p>
+    </div>
+    <div class="stat-card" style="cursor: pointer; background: white;" onclick="window.location.href='/products'">
+        <h3 style="color: #666; font-size: 16px;">Total Products</h3>
+        <p id="dash-products" style="font-size: 24px; font-weight: bold; margin-top: 10px;">0</p>
+    </div>
+    <div class="stat-card" style="cursor: pointer; background: white;" onclick="window.location.href='/stock'">
+        <h3 style="color: #666; font-size: 16px;">Low Stock</h3>
+        <p id="dash-lowstock" class="danger-text" style="font-size: 24px; font-weight: bold; margin-top: 10px;">0</p>
+    </div>
+</div>
+
+<div class="dashboard-widgets">
+    <!-- Placeholder for future widgets like recent activity or charts -->
+    <div class="widget glass-panel">
+        <h3>Quick Tips 💡</h3>
+        <ul class="tips-list">
+            <li>Say "Checkout" anytime to quickly generate the bill.</li>
+            <li>Say "Clear Cart" to empty the cart instantly.</li>
+            <li>Ensure product aliases in Tamil are mapped correctly in the Products page for best accuracy.</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/dashboard.js?v=2"></script>
+<script>
+    // Dynamic greeting based on time of day
+    const hour = new Date().getHours();
+    let greeting = "Good Evening";
+    if(hour < 12) greeting = "Good Morning";
+    else if(hour < 18) greeting = "Good Afternoon";
+    document.getElementById('greeting').innerText = greeting + ", Admin! 👋";
+</script>
+{% endblock %}
